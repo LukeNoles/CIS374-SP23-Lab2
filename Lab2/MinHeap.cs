@@ -45,7 +45,6 @@ namespace Lab2
             return array[0];
         }
 
-        // TODO
         /// <summary>
         /// Adds given item to the heap.
         /// Time complexity: O(?)
@@ -80,13 +79,11 @@ namespace Lab2
         /// </summary>
         public T ExtractMax()
         {
-            // linear search
-
-            // remove max
+            throw new NotImplementedException();
 
         }
 
-        // TODO
+
         /// <summary>
         /// Removes and returns the min item in the min-heap.
         /// Time complexity: O( log(n) )
@@ -112,7 +109,6 @@ namespace Lab2
             return min;
         }
 
-        // TODO
         /// <summary>
         /// Returns true if the heap contains the given value; otherwise false.
         /// Time complexity: O( N )
@@ -133,15 +129,18 @@ namespace Lab2
 
         }
 
-        // TODO
+
         /// <summary>
         /// Updates the first element with the given value from the heap.
         /// Time complexity: O( ? )
         /// </summary>
         public void Update(T oldValue, T newValue)
         {
-
-
+            if (Contains(oldValue))
+            {
+                Remove(oldValue);
+                Add(newValue);
+            }
 
         }
 
@@ -157,44 +156,62 @@ namespace Lab2
 
         }
 
-        // TODO
         // Time Complexity: O( log(n) )
         private void TrickleUp(int index)
         {
-
+            while (Parent(index) >= index)
+            {
+                Swap(Parent(index), index);
+                index = Parent(index);
+            }
 
         }
 
-        // TODO
         // Time Complexity: O( log(n) )
         private void TrickleDown(int index)
         {
+            while (LeftChild(index) != null)
+            {
+                int smallchild = LeftChild(index);
+                if (RightChild(index) < LeftChild(index))
+                {
+                    smallchild = RightChild(index);
+                }
 
+                if (Parent(index) <= smallchild)
+                {
+                    break;
+                }
+                else
+                {
+                    Swap(index, smallchild);
+                }
+                index = smallchild;
+            }
         }
 
-        // TODO
         /// <summary>
         /// Gives the position of a node's parent, the node's position in the heap.
         /// </summary>
         private static int Parent(int position)
         {
-
+            return (position - 1) / 2;
         }
 
-        // TODO
         /// <summary>
         /// Returns the position of a node's left child, given the node's position.
         /// </summary>
         private static int LeftChild(int position)
         {
+            return 2 * position + 1;
         }
 
-        // TODO
         /// <summary>
         /// Returns the position of a node's right child, given the node's position.
         /// </summary>
         private static int RightChild(int position)
         {
+            return 2 * position + 2;
         }
 
         private void Swap(int index1, int index2)
